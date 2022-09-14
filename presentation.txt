@@ -1,0 +1,111 @@
+(1) ALLOCATION AUTOMATIQUE
+Lorsque vous declarer une variable automatiquement de lespace memoire pour la variable dans une zone de memoire 
+(RAM) appele ==>> (STACK).
+
+(2) ALLOCATION DYNAMIQUE 
+Le compilateur alloue ou liberer manullement de lespace de la memoire en fonction des besoins de programmation,
+La memoire dynamique est geree dans une partie de la memoire (RAM) appele (HEAP).
+
+(3) MALLOC
+La méthode « malloc » ou « allocation de mémoire » en C est utilisée pour allouer dynamiquement un seul grand bloc
+de mémoire avec la taille spécifiée. Elle renvoie un pointeur de type void qui peut être converti en un pointeur 
+de n'importe quelle forme. Il n'initialise pas la mémoire au moment de l'exécution
+de sorte qu'il a initialement initialisé chaque bloc avec la valeur de mémoire par défaut.
+
+- Syntax Malloc Function
+malloc() ==>> malloc (number *sizeof(int));
+
+- Example simple variable
+int * p;
+p = malloc(4 * sizeof(int));
+*p = 12;
+
+-Example pour les tableau
+int * p = malloc(4 * sizeof(int));
+*(p + 0) = 1;
+*(p + 1) = 4;
+*(p + 2) = 7;
+
+(4) FREE
+La fonction free est liberer la memoire alloue par malloc fonction.
+
+- Syntax free fonction
+free() ==>> free (pointer_name);
+
+- example free() avec malloc()
+char *p1, *p2, *p3;
+p1 = malloc(100);
+printf(p1);
+p1 = malloc(50);
+printf(p2);
+free(p1);
+p1 = malloc(40);
+printf(p3);
+
+(5) CALLOC
+La fonction calloc() et malloc() est similaire. 
+Mais calloc() alloue de la mémoire pour les initialisations à zéro. Cependant, malloc() ne le fait pas.
+
+- Syntax Calloc Fonction
+calloc() ==>> calloc (number, sizeof(int));
+
+- Example
+int * p1 = malloc(4 * sizeof(int)); ====>> garbague value
+int * p2 = calloc(4, sizeof(int)); =====>> initialisation a 0
+printf("%d \n", *(p1 + 0)); // 23494857
+printf("%d \n", *(p1 + 1)); // 98067542
+printf("%d \n", *(p1 + 2)); // 23498655
+printf("%d \n", *(p2 + 0)); // 0
+printf("%d \n", *(p2 + 1)); // 0
+printf("%d \n", *(p2 + 2)); // 0
+
+(6) REALLOC
+La fonction realloc() modifie la taille de la mémoire allouée à une nouvelle taille par les fonctions 
+malloc() et calloc().
+S'il n'y a pas suffisamment d'espace dans la mémoire du bloc actuel pour l'étendre, un nouveau bloc 
+est alloué pour la taille totale de la réallocation, puis copie les données existantes 
+dans le nouveau bloc et libère l'ancien bloc.
+
+- Syntax Realloc Fonction
+realloc() ==>> realloc (pointer_name, number * sizeof(int));
+
+- Example
+int * p = malloc(4 * sizeof(int));
+p = realloc(p, 6 * sizeof(int));
+
+(7) PRATIQUE
+Ecrire un programme qui alloue dynamiquement la memoire avec (malloc ou calloc) d'un tableau de n elements (n doit etre saisi par l'utilisateur).
+Ensuit le programme calcule et affiche la somme et le moyenne des element du tableau
+(n'oublier pas de liberer l'espace de memoire reserve avant la fin du programme).
+
+// Code 
+int i, number;
+float somme, moyenne;
+printf("Please enter a number \n");
+scanf("%d", &number)
+int *p = calloc(number, sizeof(float));
+if(p == Null){
+	printf("la memoire n'est pas alloue \n");
+	exit(0);
+}else{
+	for(i = 0; i < n; i++){
+	printf("Please enter your notes \n");
+	scanf("%f", (p + i));
+        }
+
+	somme = 0;
+
+	for(i = 0; i < n; i++){
+	somme += *(p + i);
+        }
+
+	moyenne = somme / n;
+	printf("La somme des notes %.2f \n", somme);
+	printf("La moyenne des notes %.2f \n", moyenne);
+
+	free(p);
+
+}
+
+
+
